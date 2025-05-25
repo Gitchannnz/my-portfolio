@@ -340,7 +340,7 @@ const Home = () => {
           <div style={imageWrapperStyle}>
             <div style={glowStyle}></div>
             <img
-              src={ProfileImage} // ✅ Correct image usage
+              src={ProfileImage} 
               alt="Christian Margallo Profile"
               style={profileImageStyle}
             />
