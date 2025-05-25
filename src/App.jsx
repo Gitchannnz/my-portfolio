@@ -1,12 +1,12 @@
 import React from "react";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Routes, Route } from "react-router-dom";
-import Header from "./pages/header/Header";
+import Header from "./pages/Header/Header";
 import Home from "./pages/home/Home";
 import Aboutme from "./pages/aboutme/Aboutme";
-import MoreInfo from "./pages/moreinfo/MoreInfo";
-import Academic from "./pages/academic/Academic";
-import Education from "./pages/education/Education";
-import Skill from "./pages/skill/Skill"; // Import Skill component
+import Skill from "./pages/Skill/Skill_main";
+import Projects from "./pages/Projects/Projects_main";
+import Contact from "./pages/Contact/Contact_main";
 
 const App = () => {
   return (
@@ -15,10 +15,9 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/aboutme" element={<Aboutme />} />
-        <Route path="/more-info" element={<MoreInfo />} />
-        <Route path="/academic" element={<Academic />} />
-        <Route path="/education" element={<Education />} />
-        <Route path="/skills" element={<Skill />} /> {/* Added Skills Route */}
+        <Route path="/skills" element={<Skill />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </div>
   );
