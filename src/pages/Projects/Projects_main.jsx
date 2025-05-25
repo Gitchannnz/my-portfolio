@@ -60,27 +60,74 @@ const Projects = () => {
     },
   ];
 
-  // Styles and animations remain the same as your original code (omitted here for brevity)
+  // Responsive CSS in <style>
+  const keyframes = `
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.5); }
+      50% { box-shadow: 0 0 30px rgba(139, 69, 19, 0.8); }
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    @media (max-width: 1024px) {
+      .projects-container {
+        padding: 2.5rem 4vw !important;
+      }
+      .projects-title {
+        font-size: 2.5rem !important;
+      }
+    }
+    @media (max-width: 800px) {
+      .projects-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .projects-container {
+        padding: 1.2rem 2vw !important;
+      }
+      .projects-title {
+        font-size: 1.5rem !important;
+      }
+      .project-card {
+        padding: 1rem !important;
+      }
+      .project-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 1.1rem !important;
+      }
+      .project-card h3 {
+        font-size: 1rem !important;
+      }
+      .project-card p {
+        font-size: 0.95rem !important;
+      }
+      .project-tech span {
+        font-size: 0.7rem !important;
+        padding: 0.2rem 0.5rem !important;
+      }
+      .project-actions a,
+      .project-actions button {
+        font-size: 0.8rem !important;
+        padding: 0.6rem 1rem !important;
+      }
+    }
+  `;
 
   return (
     <>
-      <style>{`
-        @keyframes gradientShift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        @keyframes pulse {
-          0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.5); }
-          50% { box-shadow: 0 0 30px rgba(139, 69, 19, 0.8); }
-        }
-        @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
+      <style>{keyframes}</style>
       <div
+        className="projects-container"
         style={{
           minHeight: "100vh",
           background: `
@@ -99,6 +146,7 @@ const Projects = () => {
           padding: "4rem 8%",
           position: "relative",
           overflow: "hidden",
+          boxSizing: "border-box",
         }}
       >
         <div
@@ -127,7 +175,7 @@ const Projects = () => {
             zIndex: 2,
           }}
         >
-          <div
+          {/* <div
             style={{
               display: "inline-block",
               padding: "0.4rem 1rem",
@@ -144,9 +192,10 @@ const Projects = () => {
             }}
           >
             &lt; PORTFOLIO /&gt;
-          </div>
+          </div> */}
 
           <h1
+            className="projects-title"
             style={{
               fontSize: "3.5rem",
               fontWeight: "900",
@@ -180,6 +229,7 @@ const Projects = () => {
         </div>
 
         <div
+          className="projects-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
@@ -192,6 +242,7 @@ const Projects = () => {
         >
           {projectsData.map((project, index) => (
             <div
+              className="project-card"
               key={index}
               style={{
                 background:
@@ -202,12 +253,14 @@ const Projects = () => {
                 position: "relative",
                 overflow: "hidden",
                 cursor: "pointer",
-                transition:
-                  "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+                transition: "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 transform: "translateY(20px)",
                 opacity: 0,
                 animation: "fadeInUp 0.8s ease-out forwards",
                 animationDelay: `${index * 0.2}s`,
+                display: "flex",
+                flexDirection: "column",
+                minHeight: "340px",
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.transform =
@@ -236,6 +289,7 @@ const Projects = () => {
                   opacity: 0,
                   transition: "opacity 0.3s ease",
                   zIndex: -1,
+                  borderRadius: "8px",
                 }}
               ></div>
 
@@ -248,11 +302,11 @@ const Projects = () => {
                 }}
               >
                 <div
+                  className="project-icon"
                   style={{
                     width: "60px",
                     height: "60px",
-                    background:
-                      "linear-gradient(45deg, #8B4513, #D2691E)",
+                    background: "linear-gradient(45deg, #8B4513, #D2691E)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -260,6 +314,7 @@ const Projects = () => {
                     color: "white",
                     position: "relative",
                     overflow: "hidden",
+                    borderRadius: "50%",
                   }}
                 >
                   <i className={project.icon}></i>
@@ -290,6 +345,7 @@ const Projects = () => {
               </p>
 
               <div
+                className="project-tech"
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
@@ -309,14 +365,15 @@ const Projects = () => {
                       textTransform: "uppercase",
                       letterSpacing: "0.05rem",
                       fontWeight: "500",
+                      borderRadius: "4px",
                     }}
                   >
                     {tech}
                   </span>
                 ))}
               </div>
-
               <div
+                className="project-actions"
                 style={{
                   display: "flex",
                   gap: "1rem",
@@ -330,8 +387,7 @@ const Projects = () => {
                     rel="noopener noreferrer"
                     style={{
                       padding: "0.8rem 1.5rem",
-                      background:
-                        "linear-gradient(45deg, #8B4513, #D2691E)",
+                      background: "linear-gradient(45deg, #8B4513, #D2691E)",
                       border: "1px solid #CD853F",
                       color: "white",
                       fontSize: "0.9rem",
@@ -343,6 +399,7 @@ const Projects = () => {
                       flex: 1,
                       textAlign: "center",
                       textDecoration: "none",
+                      borderRadius: "6px",
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.transform = "translateY(-2px)";
@@ -370,6 +427,7 @@ const Projects = () => {
                       cursor: "not-allowed",
                       opacity: 0.5,
                       flex: 1,
+                      borderRadius: "6px",
                     }}
                     disabled
                     title="Live site not available"
@@ -397,6 +455,7 @@ const Projects = () => {
                       flex: 1,
                       textAlign: "center",
                       textDecoration: "none",
+                      borderRadius: "6px",
                     }}
                     onMouseEnter={(e) => {
                       e.target.style.background = "rgba(139, 69, 19, 0.1)";
@@ -423,6 +482,7 @@ const Projects = () => {
                       cursor: "not-allowed",
                       opacity: 0.5,
                       flex: 1,
+                      borderRadius: "6px",
                     }}
                     disabled
                     title="Source code not available"

@@ -12,6 +12,92 @@ const AboutMe = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Responsive CSS in <style>
+  const keyframes = `
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(139, 69, 19, 0.6); }
+    }
+    @media (max-width: 1100px) {
+      .about-content {
+        gap: 2.5rem !important;
+      }
+      .about-image-container {
+        width: 300px !important;
+        height: 370px !important;
+      }
+    }
+    @media (max-width: 900px) {
+      .about-content {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 2.5rem !important;
+      }
+      .about-image-container {
+        width: 320px !important;
+        height: 390px !important;
+        margin: 0 auto 2rem !important;
+      }
+      .about-text-container {
+        max-width: 100% !important;
+        padding-right: 0 !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .about-container {
+        padding: 2.5rem 3vw 2rem !important;
+      }
+      .about-heading {
+        font-size: 2.1rem !important;
+      }
+      .about-role {
+        font-size: 1.1rem !important;
+      }
+      .about-image-container {
+        width: 200px !important;
+        height: 240px !important;
+      }
+      .about-description {
+        font-size: 0.98rem !important;
+      }
+      .about-stats {
+        gap: 1rem !important;
+        margin-top: 1.2rem !important;
+      }
+      .about-stat-number {
+        font-size: 1.3rem !important;
+      }
+      .about-skill-tag {
+        font-size: 0.7rem !important;
+        padding: 0.3rem 0.7rem !important;
+      }
+      .about-btn {
+        font-size: 0.85rem !important;
+        padding: 0.7rem 1.2rem !important;
+      }
+    }
+    @media (max-width: 400px) {
+      .about-container {
+        padding: 1rem 1vw 1rem !important;
+      }
+      .about-heading {
+        font-size: 1.2rem !important;
+      }
+      .about-image-container {
+        width: 130px !important;
+        height: 150px !important;
+      }
+    }
+  `;
+
   const containerStyle = {
     minHeight: "100vh",
     padding: "8rem 5% 5rem",
@@ -59,6 +145,7 @@ const AboutMe = () => {
     transform: isVisible ? "translateX(0)" : "translateX(-100px)",
     opacity: isVisible ? 1 : 0,
     transition: "all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+    paddingRight: "1rem",
   };
 
   const sectionTagStyle = {
@@ -126,6 +213,7 @@ const AboutMe = () => {
     letterSpacing: "0.1rem",
     transition: "all 0.3s ease",
     cursor: "pointer",
+    borderRadius: "6px",
   });
 
   const buttonStyle = {
@@ -144,6 +232,7 @@ const AboutMe = () => {
     transition: "all 0.3s ease",
     position: "relative",
     overflow: "hidden",
+    borderRadius: "6px",
   };
 
   const imageContainerStyle = {
@@ -153,6 +242,8 @@ const AboutMe = () => {
     transform: isVisible ? "translateX(0)" : "translateX(100px)",
     opacity: isVisible ? 1 : 0,
     transition: "all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s",
+    flexShrink: 0,
+    marginLeft: "0",
   };
 
   const imageStyle = {
@@ -188,10 +279,12 @@ const AboutMe = () => {
     display: "flex",
     gap: "2rem",
     marginTop: "2rem",
+    flexWrap: "wrap",
   };
 
   const statItemStyle = {
     textAlign: "center",
+    minWidth: "90px",
   };
 
   const statNumberStyle = {
@@ -211,36 +304,21 @@ const AboutMe = () => {
   // Updated skills
   const skills = ["React", "Laravel", "PHP", "HTML", "CSS"];
 
-  const keyframes = `
-    @keyframes gradientShift {
-      0%, 100% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-    @keyframes pulse {
-      0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(139, 69, 19, 0.6); }
-    }
-  `;
-
   return (
     <>
       <style>{keyframes}</style>
-      <div style={containerStyle}>
+      <div style={containerStyle} className="about-container">
         <div style={backgroundElements}></div>
-
-        <div style={contentStyle}>
-          <div style={textContainerStyle}>
+        <div style={contentStyle} className="about-content">
+          <div style={textContainerStyle} className="about-text-container">
             {/* <div style={sectionTagStyle}>&lt; ABOUT_ME /&gt;</div> */}
-
-            <h2 style={headingStyle}>CHRISTIAN MARGALLO</h2>
-
-            <div style={roleStyle}>Web Developer</div>
-
-            <p style={descriptionStyle}>
+            <h2 style={headingStyle} className="about-heading">
+              CHRISTIAN MARGALLO
+            </h2>
+            <div style={roleStyle} className="about-role">
+              Web Developer
+            </div>
+            <p style={descriptionStyle} className="about-description">
               I am a dedicated web developer skilled in React, Laravel, PHP,
               HTML, and CSS. Over the past 6 months, I completed a challenging
               capstone project and gained hands-on experience as an intern,
@@ -249,36 +327,41 @@ const AboutMe = () => {
               user-friendly solutions and continuously expanding my technical
               expertise.
             </p>
-
             <div style={skillsContainerStyle}>
               {skills.map((skill, index) => (
                 <div
                   key={index}
                   style={skillTagStyle(index)}
+                  className="about-skill-tag"
                   onMouseEnter={() => setActiveSkill(index)}
                 >
                   {skill}
                 </div>
               ))}
             </div>
-
-            <div style={statsStyle}>
+            <div style={statsStyle} className="about-stats">
               <div style={statItemStyle}>
-                <span style={statNumberStyle}>3</span>
+                <span style={statNumberStyle} className="about-stat-number">
+                  3
+                </span>
                 <span style={statLabelStyle}>Months Capstone</span>
               </div>
               <div style={statItemStyle}>
-                <span style={statNumberStyle}>3</span>
+                <span style={statNumberStyle} className="about-stat-number">
+                  3
+                </span>
                 <span style={statLabelStyle}>Months Internship</span>
               </div>
               <div style={statItemStyle}>
-                <span style={statNumberStyle}>5</span>
+                <span style={statNumberStyle} className="about-stat-number">
+                  5
+                </span>
                 <span style={statLabelStyle}>Core Skills</span>
               </div>
             </div>
-
             <button
               style={buttonStyle}
+              className="about-btn"
               onClick={() =>
                 window.open("https://e-igpnbsc.free.nf/?i=1", "_blank")
               }
@@ -295,14 +378,12 @@ const AboutMe = () => {
               EXPLORE PROJECTS
             </button>
           </div>
-
-          <div style={imageContainerStyle}>
+          <div style={imageContainerStyle} className="about-image-container">
             <div style={imageStyle}>
               <i
                 className="fas fa-laptop-code"
                 style={{ zIndex: 2, position: "relative" }}
               ></i>
-
               {/* Floating data elements */}
               <div
                 style={{
@@ -317,7 +398,6 @@ const AboutMe = () => {
                   style={{ fontSize: "1.2rem", color: "#D2691E" }}
                 ></i>
               </div>
-
               <div
                 style={{
                   ...dataVisualizationStyle,
@@ -331,7 +411,6 @@ const AboutMe = () => {
                   style={{ fontSize: "1.2rem", color: "#8B4513" }}
                 ></i>
               </div>
-
               <div
                 style={{
                   ...dataVisualizationStyle,
@@ -345,7 +424,6 @@ const AboutMe = () => {
                   style={{ fontSize: "1.2rem", color: "#CD853F" }}
                 ></i>
               </div>
-
               {/* Animated background grid */}
               <div
                 style={{
@@ -355,9 +433,9 @@ const AboutMe = () => {
                   right: 0,
                   bottom: 0,
                   background: `
-                  linear-gradient(90deg, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
-                  linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px)
-                `,
+                    linear-gradient(90deg, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+                    linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px)
+                  `,
                   backgroundSize: "20px 20px",
                   opacity: 0.3,
                   animation: "pulse 4s ease-in-out infinite",

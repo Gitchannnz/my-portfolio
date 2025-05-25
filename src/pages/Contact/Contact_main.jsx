@@ -53,6 +53,7 @@ const Contact = () => {
     },
   ];
 
+  // Inline styles
   const containerStyle = {
     minHeight: "100vh",
     background: `
@@ -71,6 +72,7 @@ const Contact = () => {
     padding: "4rem 8%",
     position: "relative",
     overflow: "hidden",
+    boxSizing: "border-box",
   };
 
   const backgroundElements = {
@@ -84,6 +86,7 @@ const Contact = () => {
       radial-gradient(circle at 80% 20%, rgba(255, 119, 48, 0.2) 0%, transparent 50%),
       radial-gradient(circle at 40% 40%, rgba(139, 69, 19, 0.1) 0%, transparent 50%)
     `,
+    zIndex: 0,
   };
 
   const headerStyle = {
@@ -134,6 +137,7 @@ const Contact = () => {
     letterSpacing: "0.2rem",
   };
 
+  // Responsive grid: use class for media query
   const contentStyle = {
     display: "grid",
     gridTemplateColumns: "1fr 1fr",
@@ -181,6 +185,7 @@ const Contact = () => {
     outline: "none",
     transition: "all 0.3s ease",
     backdropFilter: "blur(10px)",
+    borderRadius: "6px",
   };
 
   const textareaStyle = {
@@ -201,6 +206,7 @@ const Contact = () => {
     cursor: "pointer",
     transition: "all 0.3s ease",
     fontFamily: "'JetBrains Mono', monospace",
+    borderRadius: "6px",
   };
 
   const contactMethodsStyle = {
@@ -222,6 +228,7 @@ const Contact = () => {
     display: "flex",
     alignItems: "center",
     gap: "1.5rem",
+    borderRadius: "8px",
   };
 
   const methodIconStyle = {
@@ -231,9 +238,10 @@ const Contact = () => {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "1.5rem",
+    fontSize: "2rem",
     color: "white",
     flexShrink: 0,
+    borderRadius: "50%",
   };
 
   const methodContentStyle = {
@@ -265,8 +273,10 @@ const Contact = () => {
     opacity: 0,
     transition: "opacity 0.3s ease",
     zIndex: -1,
+    borderRadius: "8px",
   };
 
+  // Responsive CSS in <style>
   const keyframes = `
     @keyframes gradientShift {
       0%, 100% { background-position: 0% 50%; }
@@ -276,10 +286,42 @@ const Contact = () => {
       0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.5); }
       50% { box-shadow: 0 0 30px rgba(139, 69, 19, 0.8); }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
+      .content-grid {
+        gap: 2rem !important;
+      }
+    }
+    @media (max-width: 900px) {
       .content-grid {
         grid-template-columns: 1fr !important;
-        gap: 2rem !important;
+        gap: 2.5rem !important;
+      }
+    }
+    @media (max-width: 700px) {
+      .contact-container {
+        padding: 2.5rem 4vw !important;
+      }
+      .contact-title {
+        font-size: 2.2rem !important;
+      }
+      .contact-section-title {
+        font-size: 1.2rem !important;
+      }
+      .method-icon {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 1.2rem !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .contact-container {
+        padding: 1.2rem 2vw !important;
+      }
+      .contact-title {
+        font-size: 1.5rem !important;
+      }
+      .contact-section-title {
+        font-size: 1rem !important;
       }
     }
   `;
@@ -287,14 +329,14 @@ const Contact = () => {
   return (
     <>
       <style>{keyframes}</style>
-      <div style={containerStyle}>
+      <div style={containerStyle} className="contact-container">
         <div style={backgroundElements}></div>
 
         <div style={headerStyle}>
-          <div style={tagStyle}>&lt; CONTACT /&gt;</div>
-
-          <h1 style={titleStyle}>GET IN TOUCH</h1>
-
+          {/* <div style={tagStyle}>&lt; CONTACT /&gt;</div> */}
+          <h1 style={titleStyle} className="contact-title">
+            GET IN TOUCH
+          </h1>
           <p style={subtitleStyle}>
             Let's collaborate and build something amazing together
           </p>
@@ -303,8 +345,10 @@ const Contact = () => {
         <div style={contentStyle} className="content-grid">
           {/* Contact Form */}
           <div style={formSectionStyle}>
-            <h2 style={sectionTitleStyle}>Send Message</h2>
-            <div style={formStyle}>
+            <h2 style={sectionTitleStyle} className="contact-section-title">
+              Send Message
+            </h2>
+            <form style={formStyle} onSubmit={handleSubmit} autoComplete="off">
               <input
                 type="text"
                 name="name"
@@ -377,9 +421,8 @@ const Contact = () => {
               />
 
               <button
-                type="button"
+                type="submit"
                 style={submitButtonStyle}
-                onClick={handleSubmit}
                 onMouseEnter={(e) => {
                   e.target.style.transform = "translateY(-3px)";
                   e.target.style.boxShadow =
@@ -392,12 +435,14 @@ const Contact = () => {
               >
                 Send Message
               </button>
-            </div>
+            </form>
           </div>
 
           {/* Contact Methods */}
           <div style={contactSectionStyle}>
-            <h2 style={sectionTitleStyle}>Connect With Me</h2>
+            <h2 style={sectionTitleStyle} className="contact-section-title">
+              Connect With Me
+            </h2>
             <div style={contactMethodsStyle}>
               {contactMethods.map((method, index) => (
                 <div
@@ -423,7 +468,7 @@ const Contact = () => {
                 >
                   <div className="method-glow" style={cardGlowStyle}></div>
 
-                  <div style={methodIconStyle}>
+                  <div style={methodIconStyle} className="method-icon">
                     <i className={method.icon}></i>
                   </div>
 

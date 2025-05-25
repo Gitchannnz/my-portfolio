@@ -68,6 +68,7 @@ const Skill = () => {
     backgroundClip: "text",
     animation: "gradientShift 3s ease-in-out infinite",
     textShadow: "0 0 50px rgba(139, 69, 19, 0.5)",
+    marginTop: "5rem",
     marginBottom: "3rem",
     textAlign: "center",
     textTransform: "uppercase",
@@ -150,6 +151,7 @@ const Skill = () => {
     marginTop: "2rem",
   };
 
+  // Responsive CSS
   const keyframes = `
     @keyframes gradientShift {
       0%, 100% { background-position: 0% 50%; }
@@ -163,6 +165,48 @@ const Skill = () => {
       0%, 100% { box-shadow: 0 0 20px rgba(139, 69, 19, 0.5); }
       50% { box-shadow: 0 0 40px rgba(139, 69, 19, 0.8); }
     }
+    @media (max-width: 900px) {
+      .skills-card {
+        padding: 2rem !important;
+        max-width: 98vw !important;
+      }
+      .skills-title {
+        font-size: 2.2rem !important;
+      }
+      .skills-section-title {
+        font-size: 1.2rem !important;
+      }
+      .skills-item {
+        font-size: 1.05rem !important;
+        padding: 0.7rem 1rem !important;
+      }
+    }
+    @media (max-width: 600px) {
+      .skills-title {
+        font-size: 1.3rem !important;
+        margin-bottom: 1.2rem !important;
+      }
+      .skills-card {
+        padding: 1rem !important;
+        border-radius: 10px !important;
+      }
+      .skills-section-title {
+        font-size: 1rem !important;
+      }
+      .skills-item {
+        font-size: 0.92rem !important;
+        padding: 0.5rem 0.7rem !important;
+        border-radius: 7px !important;
+      }
+    }
+    @media (max-width: 400px) {
+      .skills-title {
+        font-size: 1rem !important;
+      }
+      .skills-card {
+        padding: 0.4rem !important;
+      }
+    }
   `;
 
   return (
@@ -171,15 +215,20 @@ const Skill = () => {
       <div style={containerStyle}>
         <div style={backgroundElements}></div>
 
-        <h1 style={titleStyle}>SKILLS</h1>
+        <h1 style={titleStyle} className="skills-title">
+          SKILLS
+        </h1>
 
-        <div style={cardStyle}>
+        <div style={cardStyle} className="skills-card">
           <div style={cardGlowStyle}></div>
 
           <div style={sectionStyle}>
-            <h3 style={sectionTitleStyle}>Frontend Skills</h3>
+            <h3 style={sectionTitleStyle} className="skills-section-title">
+              Frontend Skills
+            </h3>
             <div
               style={skillItemStyle}
+              className="skills-item"
               onMouseEnter={(e) => {
                 e.target.style.background = "rgba(139, 69, 19, 0.2)";
                 e.target.style.borderColor = "rgba(210, 105, 30, 0.5)";
@@ -197,6 +246,7 @@ const Skill = () => {
             </div>
             <div
               style={skillItemStyle}
+              className="skills-item"
               onMouseEnter={(e) => {
                 e.target.style.background = "rgba(139, 69, 19, 0.2)";
                 e.target.style.borderColor = "rgba(210, 105, 30, 0.5)";
@@ -214,6 +264,7 @@ const Skill = () => {
             </div>
             <div
               style={skillItemStyle}
+              className="skills-item"
               onMouseEnter={(e) => {
                 e.target.style.background = "rgba(139, 69, 19, 0.2)";
                 e.target.style.borderColor = "rgba(210, 105, 30, 0.5)";
@@ -232,9 +283,12 @@ const Skill = () => {
           </div>
 
           <div style={sectionStyle}>
-            <h3 style={sectionTitleStyle}>Backend Skills</h3>
+            <h3 style={sectionTitleStyle} className="skills-section-title">
+              Backend Skills
+            </h3>
             <div
               style={skillItemStyle}
+              className="skills-item"
               onMouseEnter={(e) => {
                 e.target.style.background = "rgba(139, 69, 19, 0.2)";
                 e.target.style.borderColor = "rgba(210, 105, 30, 0.5)";
@@ -252,6 +306,7 @@ const Skill = () => {
             </div>
             <div
               style={skillItemStyle}
+              className="skills-item"
               onMouseEnter={(e) => {
                 e.target.style.background = "rgba(139, 69, 19, 0.2)";
                 e.target.style.borderColor = "rgba(210, 105, 30, 0.5)";
