@@ -1,6 +1,17 @@
 /* App.css or index.css */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 
+:root {
+  --primary-color: #2a2d3e;
+  --accent-color: #64ffda;
+  --text-primary: #e6e6e6;
+  --text-secondary: #8892b0;
+  --background: #0a192f;
+  --gradient-1: #64ffda;
+  --gradient-2: #6b52ae;
+  --gradient-3: #1a1f2e;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -19,8 +30,110 @@ body {
   width: 100%;
   height: 100vh;
   overflow-x: hidden;
-  background-color: #58acfc; 
-  color: white;
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.app-container {
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+.background-effects {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.gradient-sphere {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, 
+    var(--gradient-1) 0%,
+    var(--gradient-2) 30%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  opacity: 0.15;
+  animation: sphereFloat 20s ease-in-out infinite;
+  top: -300px;
+  right: -300px;
+}
+
+.floating-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--gradient-1) 0%, transparent 2%),
+    radial-gradient(circle at 80% 40%, var(--gradient-2) 0%, transparent 2%),
+    radial-gradient(circle at 40% 80%, var(--gradient-1) 0%, transparent 2%),
+    radial-gradient(circle at 70% 90%, var(--gradient-2) 0%, transparent 2%);
+  background-size: 100px 100px;
+  animation: particlesFloat 15s linear infinite;
+  opacity: 0.1;
+}
+
+.main-content {
+  padding-top: 80px;
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Animations */
+@keyframes sphereFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(-100px, 100px) scale(1.1);
+  }
+  50% {
+    transform: translate(-50px, -50px) scale(0.9);
+  }
+  75% {
+    transform: translate(100px, 50px) scale(1.05);
+  }
+}
+
+@keyframes particlesFloat {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-2);
 }
 
 
